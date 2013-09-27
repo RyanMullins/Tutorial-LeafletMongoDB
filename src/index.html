@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My First Leaflet Map</title>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+     <!--[if lte IE 8]>
+         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+     <![endif]-->
+      <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+       <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+</head>
+<body>
+
+<!-- define the area the map will go into. Feel free to change the size as needed -->
+<div id="map" style="width:800px; height: 500px;"></div>
+<script>
+
+var coords = [37.69, -59.23]; // the geographic center of our map
+var zoomLevel = 3; // the map scale. See: http://wiki.openstreetmap.org/wiki/Zoom_levels
+
+var map = L.map('map').setView(coords, zoomLevel);
+
+// we need to provide the map with some base map tiles. There are few free options.
+// we'll use Stamen Acetate, a muted base map good for overlaying data.
+var tiles = 'http://acetate.geoiq.com/tiles/acetate-hillshading/';
+// if you'd like to explore other base maps, see: http://developer.mapquest.com/web/products/open/map
+
+// if you use different tiles, be sure to update the attribution :)
+
+L.tileLayer(tiles+'{z}/{x}/{y}.png', {
+attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://FortiusOne.com">FortiusOne</a> and <a href="http://stamen.com">Stamen</a>',
+maxZoom: 18
+}).addTo(map);
+
+// make an array to store the tweets we want to map
+var tweets = [];
+
+// load tweets and identify those with explicit coordinates
+$.getJSON('tweets.txt',function(data){ // note: this requires your data file to be named tweets.txt
+
+    $.each(data, function(){
+        // if the tweet has a lon,lat add it to the tweets[] array
+        if(this.coordinates) {
+            tweets.push(
+                // set up some default properties for symbols
+                L.circleMarker([this.coordinates.coordinates[1], this.coordinates.coordinates[0]], {
+                    radius: 5,
+                    fillColor: "#58006c",
+                    color: "#58006c",
+                    weight: 2,
+                    opacity: 0.5,
+                    fillOpacity: 0.25,
+                    }));
+        }
+    });
+
+    drawTweets(tweets); // a custom function for placing each tweet on the map
+});
+
+// draw tweets on the map by adding them to the map variable
+function drawTweets(tweetList) {
+    var numTweets = tweetList.length;
+
+    for(var i = 0; i < numTweets; i++) {
+        tweetList[i].addTo(map);
+    }
+}
+</script>
+
+</body>
+</html>
