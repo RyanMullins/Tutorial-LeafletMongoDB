@@ -17,6 +17,8 @@ mdb.open(function (err, db) {
             });
         }
 
+        collection.ensureIndex({'text':'text'});
+
         db.close();
         process.exit(0);
     });
