@@ -67,23 +67,16 @@
   };
 
   function getTweets (terms) {
-    console.log("Getting Tweets");
-
     $.ajax({
       'url' : 'http://localhost:8888/tweets',
       'data' : {
         'terms' : (terms ? terms : ' ')
       },
       'success' : function (res) {
-        console.log("Response received");
-
         if (res.err) { 
           console.log("Error occurred when querying tweets: " + data.message); 
         } else {
-          console.log("No error in response");
-
           if (tweetslg) { tweetslg.clearLayers(); }
-          
           drawTweets(res.data);
         }
       }
