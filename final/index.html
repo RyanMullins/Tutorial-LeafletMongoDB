@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My First Leaflet Map</title>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+     <!--[if lte IE 8]>
+         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+     <![endif]-->
+      <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+       <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+</head>
+<body>
+
+<!-- define the area the map will go into. Feel free to change the size as needed -->
+
+<div id="search">
+  <input type="text" id="searchfield" />
+  <button type="button" id="searchbutton">Search</button>
+</div>
+<div id="map" style="width:800px; height: 500px;"></div>
+<script>
+
+  var map = null;
+  var tweetslg = null;
+
+  function initMap () {
+
+    // ---- Map ----
+
+    var coords = [37.69, -59.23]; 
+    var zoomLevel = 3; 
+    
+    map = L.map('map').setView(coords, zoomLevel);
+
+    // ---- Tiles for Base Map ----
+
+    var tiles = 'http://acetate.geoiq.com/tiles/acetate-hillshading/';
+
+    L.tileLayer(tiles + '{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://FortiusOne.com">FortiusOne</a> and <a href="http://stamen.com">Stamen</a>',
+      maxZoom: 18
+    }).addTo(map);
+
+    // ---- Data Layer for Tweets ----
+
+    tweetslg = new L.LayerGroup().addTo(map);
+
+    // ---- Query Fields ----
+
+    $("#searchfield").on('keypress', function (e) {
+      if (e.keyCode == 13)  { 
+        console.log("Enter press");
+        getTweets($("#searchfield").val());
+        return false;
+      }
+    });
+
+    $("#searchbutton").on('click', function () {
+      console.log("Button click");
+      getTweets($("#searchfield").val());
+    });
+
+    // ---- Initial Query ----
+
+    getTweets(null);
+  };
+
+  function getTweets (terms) {
+    console.log("Getting Tweets");
+
+    $.ajax({
+      'url' : 'http://localhost:8888/tweets',
+      'data' : {
+        'terms' : (terms ? terms : ' ')
+      },
+      'success' : function (res) {
+        console.log("Response received");
+
+        if (res.err) { 
+          console.log("Error occurred when querying tweets: " + data.message); 
+        } else {
+          console.log("No error in response");
+
+          if (tweetslg) { tweetslg.clearLayers(); }
+          
+          drawTweets(res.data);
+        }
+      }
+    });
+  };
+ 
+  function drawTweets (tweetList) {
+    $.each(tweetList, function () {
+      if (this.obj) {
+        var tweet = this.obj;
+
+        if (tweet.coordinates) {
+          var marker = new L.circleMarker(
+            [tweet.coordinates.coordinates[1], tweet.coordinates.coordinates[0]], 
+            {
+              radius: 5,
+              fillColor: "#58006c",
+              color: "#58006c",
+              weight: 2,
+              opacity: 0.5,
+              fillOpacity: 0.25,
+            });
+
+          tweetslg.addLayer(marker);
+        }
+      }
+    });
+  };
+
+  initMap();
+
+</script>
+
+</body>
+</html>

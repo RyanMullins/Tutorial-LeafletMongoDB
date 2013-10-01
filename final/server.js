@@ -41,7 +41,7 @@ var router = function (request, response) {
 
     // Parse request for routing
 
-    var reqURI = url.parse("http://" + request.headers.host + request.url);
+    var reqURI = url.parse(request.headers.host + request.url);
 
     // Route request to proper handler or return an 'invalid request' response
 
@@ -60,7 +60,10 @@ var router = function (request, response) {
 
         // Write response
 
-        response.writeHead(200, {'Content-Type':'application/json'});
+        response.writeHead(200, {
+            'Content-Type':'application/json',
+            'Access-Control-Allow-Origin':'*'
+        });
         response.write(JSON.stringify(res));
         response.end();
     }
@@ -101,7 +104,7 @@ var tweets = function (request, response) {
 
     var reqURI = url.parse("http://" + request.headers.host + request.url);
     var params = reqURI.query;
-    var queryString = params.substr(params.indexOf('=') + 1);
+    var terms = params.substr(params.indexOf('=') + 1);
 
     // Open connection to database and collection
 
@@ -114,7 +117,7 @@ var tweets = function (request, response) {
         db.command(
             {
                 'text'   : 'tweets',    // Command to execute :  on collection
-                'search' : queryString, // Search term to query with
+                'search' : terms,       // Search term to query with
                 'limit'  : 5000         // Max number of results to return
             }, 
             function (err, obj) {
@@ -126,12 +129,15 @@ var tweets = function (request, response) {
                     'error'  : (err ? err : null),
                     'message': (err ? err.message : 'JSON response for a tweets query'),
                     'stats'  : obj.stats,
-                    'terms'  : queryString
+                    'terms'  : terms
                 };
 
                 // Write response 
 
-                response.writeHead(200, {'Content-Type':'application/json'});
+                response.writeHead(200, {
+                    'Content-Type':'application/json',
+                    'Access-Control-Allow-Origin':'*'
+                });
                 response.write(JSON.stringify(res));
                 response.end();
 
