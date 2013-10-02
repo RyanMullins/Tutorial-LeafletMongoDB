@@ -49,19 +49,21 @@ This tutorial was created as part of a series of tutorials used in the graduate-
  
 The first thing to do is to acquire all of the code for the tutorial. There are a few ways to do this.
 
-_Method 1:_ If you have git installed and are comfortable with the command line, simply run:
+__Method 1:__ If you have git installed and are comfortable with the command line, simply run:
 
 ```Shell
 $ git clone https://github.com/RyanMullins/Tutorial-LeafletMongoDB.git
 ```
 
-_Method 2:_ If you don't have git, or if you just prefer using GUI tools, you can use the GitHub app for [Mac](http://mac.github.com/) or [Windows](http://windows.github.com/)
+__Method 2:__ If you don't have git, or if you just prefer using GUI tools, you can use the GitHub app for [Mac](http://mac.github.com/) or [Windows](http://windows.github.com/)
 to clone the repo.
 
-_Method 3:_ Simply click 'Download Zip.' This will download the tutorial, including all files and folders, as a zip that you can then extract. This is the least prefered method as it is no longer within the version control system.
+__Method 3:__ Simply click 'Download Zip.' This will download the tutorial, including all files and folders, as a zip that you can then extract. This is the least prefered method as it is no longer within the version control system.
 ### Setting up MongoDB for Text Queries 
 
 <!-- Starting mongod with text search enabled -->
+
+Once you have the code, it's time to get things up and running. The first thing we need to do is start MongoDB with the option to enable text search.
 
 ```Shell
 # For Unix/Linux
@@ -75,15 +77,19 @@ start /min mongod --setParameter textSearchEnabled=true
 
 ### (Optional) Setting up a Primer Database
 
+If you do not have an existing database of Tweets in Mongo, you should follow the previous tutorial on [Piping Tweets into Mongo](https://github.com/RyanMullins/Tutorial-TwitterToMongoDB).
+
+However, if you wish to jump right in that's OK too. We've supplied a pre-cooked database for you. Running the code below will create a database and fill it with pre-collected Tweets. Only perform this action if you do not already have an existing database.
+
 <!-- Run following command from the terminal/command prompt -->
 
 ```Shell
 node src/primer_importScript.js
 ```
 
-
-
 # Creating a Web Service
+
+Now that MongoDB is up and running, we need to enable the web service so that our web-based map can communicate with it.
 
 ## Step 1: Creating an HTTP Server
 
@@ -118,6 +124,8 @@ http                        // Uses HTTP to...
 ```
 
 ## Step 2: Routing Requests
+
+Presently, the web service won't do a whole lot as it doesn't yet know what to do with requests. We can change that by adding a function to Server.js:
 
 <!-- Server.js | Implementing the Router function -->
 
