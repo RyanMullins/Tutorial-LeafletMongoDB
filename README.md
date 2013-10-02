@@ -58,7 +58,7 @@ $ git clone https://github.com/RyanMullins/Tutorial-LeafletMongoDB.git
 __Method 2:__ If you don't have git, or if you just prefer using GUI tools, you can use the GitHub app for [Mac](http://mac.github.com/) or [Windows](http://windows.github.com/)
 to clone the repo.
 
-__Method 3:__ Simply click 'Download Zip.' This will download the tutorial, including all files and folders, as a zip that you can then extract. This is the least prefered method as it is no longer within the version control system.
+__Method 3:__ Simply click 'Download Zip' to the right of this tutorial page. This will download the tutorial, including all files and folders, as a zip that you can then extract. This is the least prefered method as it is no longer within the version control system.
 ### Setting up MongoDB for Text Queries 
 
 <!-- Starting mongod with text search enabled -->
@@ -125,7 +125,7 @@ http                        // Uses HTTP to...
 
 ## Step 2: Routing Requests
 
-Presently, the web service won't do a whole lot as it doesn't yet know what to do with requests. We can change that by adding a function to Server.js:
+Presently, the web service won't do a whole lot as it doesn't yet know what to do with requests from the web browser. We can change that by adding a function to Server.js:
 
 <!-- Server.js | Implementing the Router function -->
 
@@ -164,6 +164,8 @@ var router = function (request, response) {
 ```
 
 ## Step 3: Handling Requests for Tweets
+
+After routing the requests appropriately, we need to let our HTTP server know what to do with them. In other words, we need to tell it to retreive Tweets from the database.
 
 <!-- Server.js | Responding to Requests fro Tweets -->
 
@@ -220,10 +222,13 @@ var tweets = function (request, response) {
 ```
 
 
-
 # Integrating the Web Service and Map
 
+So far, the database is running, the HTTP server has been created and returns Tweets. All that is left is to take the Tweets and plot them on the map. This part of the tutorial is very similar to the initial mapping tutorial, though some changes will need to be made to support these changes.
+
 ## Step 1: Refactoring
+
+The first step is to create a skeleton HTML page for the map view. It contains the calls to all the necessary JavaScript libraries needed, as well as the basic format of our functions (currently empty).
 
 <!-- index.html | Full replacement -->
 ```HTML
@@ -270,7 +275,7 @@ var tweets = function (request, response) {
 
 ## Step 2: Initializing the Map
 
-<!-- index.js | Implementation of initMap function -->
+<!-- index.html | Implementation of initMap function -->
 
 ```JavaScript
   function initMap () {
@@ -316,7 +321,7 @@ var tweets = function (request, response) {
 
 ## Step 3: Getting the Tweets
 
-<!-- index.js | Implementation of getTweets function -->
+<!-- index.html | Implementation of getTweets function -->
 
 ```JavaScript
   function getTweets (terms) {
@@ -339,7 +344,7 @@ var tweets = function (request, response) {
 
 ## Step 4: Drawing the Tweets
 
-<!-- index.js | Implementation of drawTweets function -->
+<!-- index.html | Implementation of drawTweets function -->
 
 ```JavaScript
   function drawTweets (tweetList) {
@@ -365,9 +370,6 @@ var tweets = function (request, response) {
     });
   };
 ```
-
-
-
 <!-- Hyperlinks -->
 
 [tut_twitterToMongo]: https://github.com/RyanMullins/Tutorial-TwitterToMongoDB
