@@ -24,7 +24,6 @@ This tutorial was created as part of a series of tutorials used in the graduate-
 * [Piping Twitter into MongoDB][tut_twitterToMongo], by Ryan S Mullins
 
 
-
 # Prerequisites 
 
 ## Skills and Tools
@@ -41,7 +40,8 @@ This tutorial was created as part of a series of tutorials used in the graduate-
 * Installed Node.js on your machine
 * Installed MongoDB on your machine 
 * Installed Git on your machine
-* Installed a text editor on your machine, we recommend Sublime Text
+* Installed a text editor on your machine, we recommend [Sublime Text](http://www.sublimetext.com/)
+
 
 ## Setup
 
