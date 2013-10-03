@@ -95,7 +95,7 @@ Now that MongoDB is up and running, we need to enable the web service so that ou
 
 ## Step 1: Creating an HTTP Server
 
-We will create a file called _server.js_. This file will contain all the instructions for our HTTP server. First, open a new text file and fill it with the code below:
+We will create a file called _server.js_ located in the _src_ folder of this project. This file will contain all the instructions for our HTTP server. First, open a new text file and fill it with the code below:
 
 <!-- Server.js | Starting Point -->
 
@@ -164,6 +164,9 @@ var router = function (request, response) {
     }
 };
 ```
+
+Lastly, to start the server, run the command `node src/server.js` (adjust the path to your server.js file accordingly). From this point on the server and database will be running.
+
 
 ## Step 3: Handling Requests for Tweets
 
