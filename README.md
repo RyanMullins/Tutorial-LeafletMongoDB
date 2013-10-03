@@ -231,7 +231,7 @@ So far, the database is running, the HTTP server has been created, and it return
 
 The first step is to create a skeleton HTML page for the map view. It contains the calls to all the necessary JavaScript libraries needed, as well as the initial construction of the necessary functions (currently empty).
 
-Create a new file, called _index.html_, based on the code below:
+Create a new file, called _index.html_, and paste the folloing code into that file:
 
 <!-- index.html | Full replacement -->
 ```HTML
