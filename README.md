@@ -398,7 +398,8 @@ Try enhancing the map based on what you've learned in the previous tutorial. For
 * Add mouseover and mouseout effects.
 * Create a popup, bind it to the drawn Tweet, and activate it on mousedown.
 * Initialize the map with a default value so that some portion (or all?) of the Tweets are shown when the page loads for the first time.
-* 
+
+
 ## Notes
 
 A completed, working example of both _server.js_ and _index.html_ exist in the _final_ folder of this project. If you have problems, compare your code to these files, run them in your browser, and examine the comments within _final/server.js_ for further documentation on its functions.
