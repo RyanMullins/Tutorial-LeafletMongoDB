@@ -52,7 +52,7 @@ The first thing to do is to acquire all of the code for the tutorial. There are 
 __Method 1:__ If you have git installed and are comfortable with the command line, simply run:
 
 ```Shell
-$ git clone https://github.com/RyanMullins/Tutorial-LeafletMongoDB.git
+git clone https://github.com/RyanMullins/Tutorial-LeafletMongoDB.git
 ```
 
 __Method 2:__ If you don't have git, or if you just prefer using GUI tools, you can use the GitHub app for [Mac](http://mac.github.com/) or [Windows](http://windows.github.com/)
@@ -65,13 +65,15 @@ __Method 3:__ Simply click 'Download Zip' to the right of this tutorial page. Th
 
 Once you have the code, it's time to get things up and running. The first thing we need to do is start MongoDB with the option to enable text search.
 
+__For Unix/Linux:__
+
 ```Shell
-# For Unix/Linux
+nohup mongod --setParameter textSearchEnabled=true &
+```
 
-$ nohup mongod --setParameter textSearchEnabled=true &
+__For Windows:__
 
-# For Windows
-
+```Shell
 start /min mongod --setParameter textSearchEnabled=true
 ```
 
