@@ -95,6 +95,8 @@ Now that MongoDB is up and running, we need to enable the web service so that ou
 
 ## Step 1: Creating an HTTP Server
 
+We will create a file called _server.js_. This file will contain all the instructions for our HTTP server. First, open a new text file and fill it with the code below:
+
 <!-- Server.js | Starting Point -->
 
 ```JavaScript
@@ -113,11 +115,7 @@ var mongo = require('mongodb');         // MongoDB Driver
 
 var mdbServer = mongo.Server('localhost', 27017, {'auto_reconnect' : true});
 var mdb = mongo.Db('streaming_db', mdbServer);
-```
 
-<!-- Server.js | Adding an HTTP Server -->
-
-```JavaScript
 // Web Service (HTTP) Server initialization
 
 http                        // Uses HTTP to...
