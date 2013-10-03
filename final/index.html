@@ -2,13 +2,12 @@
 <html>
 <head>
   <title>My First Leaflet Map</title>
-     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-     <!--[if lte IE 8]>
-         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-     <![endif]-->
-      <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
-       <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+  <![endif]-->
+  <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 </head>
 <body>
 
@@ -50,14 +49,12 @@
 
     $("#searchfield").on('keypress', function (e) {
       if (e.keyCode == 13)  { 
-        console.log("Enter press");
         getTweets($("#searchfield").val());
         return false;
       }
     });
 
     $("#searchbutton").on('click', function () {
-      console.log("Button click");
       getTweets($("#searchfield").val());
     });
 
