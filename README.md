@@ -125,7 +125,9 @@ http                        // Uses HTTP to...
 
 ## Step 2: Routing Requests
 
-Presently, the web service won't do a whole lot as it doesn't yet know what to do with requests from the web browser. We can change that by adding a function to Server.js:
+Presently, the web service won't do a whole lot as it doesn't yet know what to do with requests from the web browser. We can change that by adding a function to _server.js_ to handle such requests.
+
+Find the comment in _server.js_ that says "Routing and Handling." Just below it, add the following code:
 
 <!-- Server.js | Implementing the Router function -->
 
@@ -165,9 +167,9 @@ var router = function (request, response) {
 
 ## Step 3: Handling Requests for Tweets
 
-After routing the requests appropriately, we need to let our HTTP server know what to do with them. In other words, we need to tell it to retreive Tweets from the database.
+After routing the requests appropriately, we need to let our HTTP server know what to do with them. In other words, we need to tell it to retreive Tweets from the database. Appending the following code to _server.js_ will do just that.
 
-<!-- Server.js | Responding to Requests fro Tweets -->
+<!-- server.js | Responding to Requests fro Tweets -->
 
 ```JavaScript
 var tweets = function (request, response) {
@@ -221,14 +223,15 @@ var tweets = function (request, response) {
 };
 ```
 
-
 # Integrating the Web Service and Map
 
-So far, the database is running, the HTTP server has been created and returns Tweets. All that is left is to take the Tweets and plot them on the map. This part of the tutorial is very similar to the initial mapping tutorial, though some changes will need to be made to support these changes.
+So far, the database is running, the HTTP server has been created, and it returns Tweets. All that is left is to take the Tweets and plot them on the map. This part of the tutorial is very similar to the initial mapping tutorial, though some changes will need to be made to support the dynamic retrieval of Tweets from database.
 
 ## Step 1: Refactoring
 
-The first step is to create a skeleton HTML page for the map view. It contains the calls to all the necessary JavaScript libraries needed, as well as the basic format of our functions (currently empty).
+The first step is to create a skeleton HTML page for the map view. It contains the calls to all the necessary JavaScript libraries needed, as well as the initial construction of the necessary functions (currently empty).
+
+Create a new file, called _index.html_, based on the code below:
 
 <!-- index.html | Full replacement -->
 ```HTML
@@ -274,6 +277,8 @@ The first step is to create a skeleton HTML page for the map view. It contains t
 ```
 
 ## Step 2: Initializing the Map
+
+Notice that each function is empty. They exist but do not currently do anything. Find _function initMap()_ in _index.html_. Change its contents to match the code below. _Note:_ Be sure not to duplicate the function declaration!
 
 <!-- index.html | Implementation of initMap function -->
 
@@ -321,6 +326,10 @@ The first step is to create a skeleton HTML page for the map view. It contains t
 
 ## Step 3: Getting the Tweets
 
+If you save _index.html_ and view it in your web browser, you should see the base map, without any Tweets. The input box and button for querying Tweets will show up, but it is not yet functional.
+
+We will now set up the page to search for Tweets based on user-provided terms. To do this, find _function getTweets(terms)_ in _index.html_ and update it to relfect the code below.
+
 <!-- index.html | Implementation of getTweets function -->
 
 ```JavaScript
@@ -342,7 +351,11 @@ The first step is to create a skeleton HTML page for the map view. It contains t
   };
 ```
 
+At this point, the query feature should be functioning; you can verify this in your browser's JavaScript console. But Tweets are not yet being drawn on the map (_drawTweets()_ is currently empty).
+
 ## Step 4: Drawing the Tweets
+
+We will now add the ability to take Tweets retrieved from the query and draw them in the map. Update _function drawTweets(tweetList)_ to the version below:
 
 <!-- index.html | Implementation of drawTweets function -->
 
@@ -370,6 +383,19 @@ The first step is to create a skeleton HTML page for the map view. It contains t
     });
   };
 ```
+Save _index.html_ and refresh your browser. Try searching for a word, letter, or special character. If there are matches in your database, they should appear on the map!
+
+## TO DO
+
+This map is a bit more advanced than the one created with a previous tutorial, since it relies on a datbase that can be queried. But the visualization is a bit more basic.
+
+Try enhancing the map based on what you've learned in the previous tutorial. For instance:
+
+* Scale the circle markers by an attribute of the Tweet.
+* Add mouseover and mouseout effects.
+* Create a popup, bind it to the drawn Tweet, and activate it on mousedown.
+* Initialize the map with a default value so that some portion (or all?) of the Tweets are shown when the page loads for the first time.
+
 <!-- Hyperlinks -->
 
 [tut_twitterToMongo]: https://github.com/RyanMullins/Tutorial-TwitterToMongoDB
