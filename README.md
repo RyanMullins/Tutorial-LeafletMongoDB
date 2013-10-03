@@ -398,6 +398,5 @@ Try enhancing the map based on what you've learned in the previous tutorial. For
 
 <!-- Hyperlinks -->
 
-## Links
 [tut_twitterToMongo]: https://github.com/RyanMullins/Tutorial-TwitterToMongoDB
 
