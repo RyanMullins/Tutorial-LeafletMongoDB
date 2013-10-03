@@ -234,7 +234,7 @@ So far, the database is running, the HTTP server has been created, and it return
 
 The first step is to create a skeleton HTML page for the map view. It contains the calls to all the necessary JavaScript libraries needed, as well as the initial construction of the necessary functions (currently empty).
 
-Create a new file, called _index.html_, and paste the folloing code into that file:
+Create a new file, called _index.html_ (or open the provided file in _src/index.html_), and update its code to the following:
 
 <!-- index.html | Full replacement -->
 ```HTML
@@ -398,6 +398,10 @@ Try enhancing the map based on what you've learned in the previous tutorial. For
 * Add mouseover and mouseout effects.
 * Create a popup, bind it to the drawn Tweet, and activate it on mousedown.
 * Initialize the map with a default value so that some portion (or all?) of the Tweets are shown when the page loads for the first time.
+* 
+## Notes
+
+A completed, working example of both _server.js_ and _index.html_ exist in the _final_ folder of this project. If you have problems, compare your code to these files, run them in your browser, and examine the comments within _final/server.js_ for further documentation on its functions.
 
 <!-- Hyperlinks -->
 
