@@ -1,7 +1,7 @@
 Introducing Leaflet: Integrating with a Web Service
 ===================================================
 
-Created by Ryan S Mullins and Joshua Stevens
+Created by [Ryan S Mullins](https://github.com/RyanMullins) and [Joshua Stevens](https://github.com/jscarto).
 
 
 
